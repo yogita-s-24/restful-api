@@ -1,0 +1,42 @@
+# Node.js
+node_modules/
+
+# dotenv environment file
+.env
+
+# macOS
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# yarn
+yarn-error.log
+yarn.lock
+
+# Visual Studio Code
+.vscode/
+
+# IDE settings
+.idea/
+
+# Dependency directories
+bower_components/
+
+# Distribution directories
+dist/
+out/
+
+# Environment
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
