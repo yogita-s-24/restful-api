@@ -54,6 +54,26 @@ app.post('/api/users', async(req,res)=>{
     }
 })
 
+//get API - /api/users
+
+app.get('/api/users', async(req, res)=>{
+
+try{
+    const alluserData = await User.find();
+    res.json({
+        success:true,
+        data : alluserData,
+        message:'All users'
+        })
+}
+catch(err){
+    res.json({
+        success:false,
+        message:'Error in fetching the data'
+        })
+}
+});
+
 const PORT = process.env.PORT || 5000
 
 
