@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import express from "express";
 import dotenv from "dotenv";
+import User from "./models/User.js";
 
 dotenv.config();
 
@@ -26,9 +27,36 @@ app.get('/api/healths', async(req,res)=>{
     res.send("Server is running on.")
 })
 
+//post API - /api/users
+
+app.post('/api/users', async(req,res)=>{
+    const {userName, email, password} = req.body;
+
+    const user = new User({
+        userName: userName,
+        email:email,
+        password:password
+    })
+
+    try{
+        const saveUserData = await user.save();
+    
+        res.json({
+            success:true,
+            data:saveUserData,
+            message:"User Create Successfully"
+        });
+    }catch(err){
+        return res.json({
+            success:false,
+            error: err.message
+            });
+    }
+})
+
 const PORT = process.env.PORT || 5000
 
 
 app.listen(PORT, ()=>{
     console.log(`Server is running on ${PORT}`);
-})
+});
