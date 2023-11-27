@@ -95,7 +95,7 @@ app.delete("/api/users/:id", async (req, res) => {
 app.post("/api/post", async (req, res) => {
   const { busNumber, capacity, busType } = req.body;
 
- const buses = await new Bus({
+ const buses = new Bus({
     busNumber : busNumber,
     capacity : capacity,
     busType : busType
