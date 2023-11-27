@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import express from "express";
 import dotenv from "dotenv";
 import User from "./models/User.js";
+import Bus from "./models/Bus.js";
 
 dotenv.config();
 
@@ -87,6 +88,28 @@ app.delete("/api/users/:id", async (req, res) => {
       success: false,
       message: "User not deleted.",
     });
+  }
+});
+
+//post API - /api/buses
+app.post("/api/post", async (req, res) => {
+  const { busNumber, capacity, busType } = req.body;
+
+ const buses = await new Bus({
+    busNumber : busNumber,
+    capacity : capacity,
+    busType : busType
+ })
+
+  try {
+    const savebuses = await buses.save();
+    res.json({
+      success: true,
+      data: savebuses,
+      message: "Buses save Successfully.",
+    });
+  } catch (err) {
+    console.log("error");
   }
 });
 
