@@ -15,7 +15,7 @@ const busSchema = new mongoose.Schema({
     default:'Non AC',
     required:true
   }
-});
+},{timestamps:true});
 
 const Bus = mongoose.model("busSchema", Bus);
 
