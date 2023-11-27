@@ -9,7 +9,7 @@ dotenv.config();
 import { getApiHealth } from "./controllers/health.js";
 import { postApiUsers, getApiUsers, deleteApiUsers } from "./controllers/user.js";
 import { postApiBuses, getApiBuses, getApiBusesId, putApiBus, patchApiBus, deleteApiBuses } from "./controllers/bus.js";
-
+import { postApiBookings } from "./controllers/booking.js";
 
 const app = express();
 app.use(express.json());
@@ -61,50 +61,8 @@ app.delete('/api/v1/buses/:id',deleteApiBuses);
 
 //post API - /api/booking
 
-app.post('/api/bookings', async(req,res)=>{
-    const {user,bus,contactNumber,seatNumber,date,isConfirmed,to,from} = req.body;
+app.post('/api/v1/bookings',postApiBookings);
 
-    try{
-      const booking = new Booking ({
-          user,
-          bus,
-          contactNumber,
-          seatNumber,
-          date,
-          isConfirmed,
-          to,
-          from
-      })
-  
-      const saveBookings = await booking.save();
-  
-      res.json({
-          success:true,
-          data:saveBookings,
-          message:"Booking created successfully"
-      })
-
-    }catch(err){
-      console.log('Error in saving booking');
-    }
-});
-
-//GET /booking/:id
-app.get("/api/bookings/:id", async (req, res) => {
-  const { id } = req.params;
-  const findBooking = await Order.findById(id).populate("user booking");
-
-  //This not show in booking
-  findBooking.user.password = undefined;
-
-  res
-    .json({
-      success: true,
-      data: findBooking,
-      message: "Booking successfully found",
-    })
-    .populate("user booking");
-});
 
 const PORT = process.env.PORT || 5000;
 
